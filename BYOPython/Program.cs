@@ -103,6 +103,23 @@ s.close()";
             Py_FinalizeEx();
         }
 
+        public static void BYOP()
+        {
+            // Example code to Bring Your Own Python
+
+            var pythonPath = @"C:\Windows\Temp\BYOP";
+
+            using (WebClient wc = new WebClient())
+            {
+                wc.DownloadFile(
+                new System.Uri("https://www.python.org/ftp/python/3.8.0/python-3.8.0-embed-amd64.zip"),
+                "C:\\Windows\\Temp\\python-embed.zip"
+                );
+            }
+
+            System.IO.Compression.ZipFile.ExtractToDirectory("C:\\Windows\\Temp\\python-embed.zip", "C:\\Windows\\Temp\\BYOP");
+        }
+
         [DllImport("kernel32.dll")]
         static extern IntPtr LoadLibrary(string name);
 
